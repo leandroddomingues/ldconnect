@@ -1,8 +1,8 @@
 <?php
-	$servidor = "localhost";
-	$usuario = "root";
-	$senha = "";
-	$dbname = "celke";
+	$servidor = "mysql524.umbler.com";
+	$usuario = "ldconnect";
+	$senha = "a36825700";
+	$dbname = "ldconnect";
 	
 	//Criar a conexão
 	$conn = mysqli_connect($servidor, $usuario, $senha, $dbname);
