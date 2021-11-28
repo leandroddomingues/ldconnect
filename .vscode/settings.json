@@ -1,0 +1,5 @@
+{
+    "git.allowForcePush": true,
+    "git.showPushSuccessNotification": true,
+    "git.followTagsWhenSync": true
+}
