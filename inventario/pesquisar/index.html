@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<title>Cadastrando itens</title>
+		
+	<style>
+	
+
+
+
+
+.botao{
+	font-weight: bold;
+		background-color: white;
+	float: ;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-top-color: black;
+	border-right-color:black ;
+	border-bottom-color:black;
+	border-left-color: black;
+	color: black;
+	margin-left: ;
+}
+.botao:hover{
+	color: #330000;
+	background-color: #8ba8abc3;
+	/*CSS 3*/
+	/*border-radius: 10px 0px 10px 0px;*/
+}
+#outer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.formulario_dos_itens{
+    visibility:hidden;
+    position:absolute;
+}
+
+.formulario_dos_itens_visible{
+    visibility:visible;
+    position:relative;
+}
+
+	    
+	</style>
+	<head>
+	<body>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	    
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+			
+<script>
+//if ($("#codigo").is(":focus")) {
+// clicado();
+ //$("#codigo").on('focus', function() {
+          //  $("#username-pop-up").slideDown();
+   //   
+    //if(e.which == 13) enviado();
+ 
+ //alert("Focus");
+//}
+
+$(document).keypress(function(e) {
+    if(e.which == 13){ enviado();}
+});
+$(document).ready(function(){
+//$("#codigo").focus(function(){
+    
+    $("#codigo").focus();
+  //  $("span").css("display", "inline").fadeOut(2000);
+//});
+
+});
+//$("#codigo").focus();
+ //function  clicado(){
+//};
+  //});
+    $(function(){
+        
+     
+	/*$("#pesquisa").keyup(function(){
+		//Recuperar o valor do campo
+		var pesquisa = $(this).val();
+		
+		//Verificar se há algo digitado
+		if(pesquisa != ''){
+			var dados = {
+				palavra : pesquisa
+			}
+			$.post('proc_pesq_user.php', dados, function(retorna){
+				//Mostra dentro da ul os resultado obtidos 
+				$(".resultado").html(retorna);
+			});
+		}
+	});
+	
+	*/
+		$("#editarCliente").click(function(){
+		     $('#editarCliente').addClass('formulario_dos_itens');
+        $('#editarCliente').removeClass('formulario_dos_itens_visible');
+        
+		     $('#cntrato').addClass('formulario_dos_itens_visible');
+        $('#cntrato').removeClass('formulario_dos_itens');
+        
+         $('#formulario_dos_itens').addClass('formulario_dos_itens');
+        $('#formulario_dos_itens').removeClass('formulario_dos_itens_visible');
+        
+         $('#btn_enviar_contrato').addClass('formulario_dos_itens');
+        $('#btn_enviar_contrato').removeClass('formulario_dos_itens_visible');
+        
+         $('#btn_enviar_contrato2').addClass('formulario_dos_itens_visible');
+        $('#btn_enviar_contrato2').removeClass('formulario_dos_itens');
+        const newDiv = $("<h4  class=\"negacao\"> Preencha os campos abaixo: </h4>");
+
+        		$(".resultado").html(newDiv);
+		});
+		
+	$("#btn_enviar_contrato2").click(function(){
+		//Recuperar o valor do campo
+		var contrato1 = $("#contrato").val();
+		var cliente1 = $("#cliente").val();
+if (contrato1 != "" && cliente1 != "" ){
+   $('#cntrato').removeClass('formulario_dos_itens_visible');
+        $('#cntrato').addClass('formulario_dos_itens');
+        
+         $('#formulario_dos_itens').removeClass('formulario_dos_itens');
+        $('#formulario_dos_itens').addClass('formulario_dos_itens_visible');
+        
+         $('#btn_enviar_contrato').removeClass('formulario_dos_itens');
+        $('#btn_enviar_contrato').addClass('formulario_dos_itens_visible');
+        
+         $('#btn_enviar_contrato2').removeClass('formulario_dos_itens_visible');
+        $('#btn_enviar_contrato2').addClass('formulario_dos_itens');
+        	
+        	 $('#editarCliente').removeClass('formulario_dos_itens');
+        $('#editarCliente').addClass('formulario_dos_itens_visible');
+        
+        	const newDiv = $("<div  class=\"negacao\"><strong> Cliente: </strong>" + cliente1 + " <br> <strong> Contrato: </strong>"+ contrato1 + "	<br>	  </div>");
+
+        	$(".resultado").html(newDiv);
+        	
+}else{
+    	const newDiv = $("<h4  class=\"negacao\"> Preencha os campos acima! </h4>");
+
+        	$(".resultado").html(newDiv);
+        	
+}
+//	enviado();
+	
+/*	
+		//Verificar se há algo digitado
+		if(contrato1 != ''){
+		//    $(".resultado").html(contrato1 + "/ - " + cliente1);
+			var dados = {
+				contrato : contrato1
+				cliente : cliente1
+			}
+			$.post('proc_pesq_user.php', dados, function(retorna){
+				//Mostra dentro da ul os resultado obtidos 
+				$(".resultado").html(retorna);
+			});
+		
+		    
+		}
+		
+		*/
+		
+
+     $('#tabela').removeClass('formulario_dos_itens');
+     $('#tabela').addClass('formulario_dos_itens_visible');
+    
+
+
+
+
+
+         
+        
+     //	$(".resultado").html("Clicado - X");
+// $("#textocoment").val()
+var dadosFormulario = $("#form-cntrato").serialize();
+
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user3.php",
+  data: dadosFormulario,
+  success: function(resposta) {
+      	//$(".resultado").html("Clicado - X1");
+      		$(".td").html(resposta);
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+
+
+	});
+});
+    
+
+
+    function  enviado(){
+        
+
+ //       alert($('#codigo').val());
+var codigo = $('#codigo').val();
+var artigo = $('#artigo').val();
+var estoque = $('#estoque').val();
+var npessoas = $('#n_de_pessoas').val();
+ if (codigo == ""){
+ alert("Preencha o campo!")
+ 
+ 
+}else{
+   
+
+
+
+     $('#tabela').removeClass('formulario_dos_itens');
+     $('#tabela').addClass('formulario_dos_itens_visible');
+    
+
+
+
+
+
+         
+        
+     //	$(".resultado").html("Clicado - X");
+// $("#textocoment").val()
+var dadosFormulario = $("#form-cntrato").serialize();
+
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user3.php",
+  data: dadosFormulario,
+  success: function(resposta) {
+      if(resposta == "Erro"){
+      alert('Este item já foi cadastrado!');
+      }else{
+      	//$(".resultado").html("Clicado - X1");
+      		$(".td").html(resposta);
+      			$(".resultado2").html(resposta);
+      		
+$('#codigo').val("");
+$('#artigo').val("");
+$('#estoque').val("");
+$('#fabricacao_da_peca').val("");
+$('#n_de_pessoas').val("");
+      }
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+
+     
+/*
+	//$(".resultado").html("Clicado2");
+	
+var dadosFormulario = "";//$("#coment").serialize();
+	var contrato1 = $("#contrato").val();
+		var cliente1 = $("#cliente").val();
+//		var dados = {
+//				contrato : contrato1
+//				cliente : cliente1
+//			};
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user.php",
+  data: dados,
+  success: function(resposta) {
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+   
+    // const newBtn = $("<button type=\button\" class=\"negacao\">Pressione-me!</button>");
+
+//   alert(resposta);
+//const newBtn = $(resposta);
+
+    
+    // Adiciona-o à lista de botões:
+    $(".resultado").html(resposta);
+//   $("#div1").append(newBtn);
+  },
+  error: function() {
+ $(".resultado").html("correu mal, agir em conformidade");
+  }
+});
+
+*/
+ }
+ 
+        
+    };
+    
+</script>
+	<div style="text-align:center;"id="outers">  
+  
+  <div style="text-align:left;width:80%;margin-left:10%;">   
+		<h1>Consultando itens (App)</h1>
+	
+	
+	<button class="formulario_dos_itens botao"id="editarCliente" type="" value="">Editar os dados do cliente</button>
+<br><br>
+	<form method="POST" id="form-cntrato" action="">
+    			<div style="visibility:hidden;position:absolute;" width="750px"id="cntrato">
+    		    	<h3>Adicione os dados a seguir:</h3>
+		  
+    		<label>Digite o número do contrato</label><br>
+		    <input type="text" id="contrato"name="contrato"><br><br>
+			<label>Digite o nome do cliente</label><br>
+		    <input type="text" id="cliente"name="cliente">
+		 
+		
+		 </div>
+		 <div>
+		 	<div class="resultado">
+		  </div>
+		</div>
+<div id="formulario_dos_itens" class="formulario_dos_itens"style="position:;">
+	<h3>Adicione os dados a seguir:</h3>
+            <input type="hidden" class="formulario_dos_itens" id="id"name="id">
+            <input type="hidden" class="formulario_dos_itens"id="id"name="id">
+		    <input type="hidden"class="formulario_dos_itens" id="id"name="id">
+			
+		
+			
+			
+			<label>Descrição do artigo</label><br>
+		    <input type="text" id="artigo"name="artigo">
+	        
+	       	<label> Número de pessoas</label><br>
+		    <input type="text" id="n_de_pessoas"name="n_de_pessoas">
+			
+		
+		<div class="formulario_dos_itens">
+		    <label>Número de trocas </label><br>
+		    <input type="text" id="n_de_trocas"name="n_de_trocas">
+			
+		
+			<label>Consumo semanal</label><br>
+		    <input type="text" id="cons_semanal"name="cons_semanal">
+		    
+		     <label>Fabricação da peça</label><br>
+		    <input type="text" id="fabricacao_da_peca"name="fabricacao_da_peca">
+			
+		    </div>	
+			
+			<label> Estoque</label><br>
+		    <input type="text" id="estoque"name="estoque">
+		    
+		    
+			  </div>
+			  
+			  	<label> Codigo do produto</label><br>
+		    <input type="text" id="codigo"name="codigo"><br><br>
+</form>
+<br>
+	<button class="formulario_dos_itens botao"id="btn_enviar_contrato2" type="" value="">Próximo</button>
+
+	<button class="formulario_dos_itens_visible botao"id="btn_enviar_contrato" type="" onclick="enviado()"value="">Cadastrar</button><br><br>
+
+
+<div id="tabela" class="formulario_dos_itens" style="border:solid 1px;width:750px;">
+<table  style='border-bottom:1pt solid black;'> 
+<tr> 
+
+<th style='text-align:center;'width="250px">Código</th> 
+<th style='text-align:center;'width="400px">Descrição</th> 
+<th style='text-align:center;'width="100px">Estoque</th> 
+</tr> 
+
+
+</table>
+
+        
+    
+<div class="td">
+
+       
+    </div>
+  </div>
+  
+
+
+<table style="visibility:hidden;position:;"border="1">
+    <tr>
+        <th height="">Frutas</th>
+        <th>Verduras</th>
+        <th>Grãos</th>
+        
+        </tr>
+        
+        <div id="resultado2">
+            
+            </div>
+        
+        <tr>
+            
+            <td>Laranja</td>
+            <td>Beterraba</td>
+            <td>Trigo</td>
+            </tr>
+            
+    </table>
+
+		<!--	<label>Arquivo</label><br>
+			<input type="file" name="arquivo"><br><br>
+			<label>Data da entrega do material limpo</label><br>
+			<input type="date" name="dataDaEntrega"><br><br>
+		-->
+		
+	
+		</div>
+       
+	
+		</div>
+
+
+		
+	</body>
+</html>

@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<title>Cadastrando Cliente</title>
+		
+	<style>
+	
+
+
+
+
+.botao{
+	font-weight: bold;
+		background-color: white;
+	float: ;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-top-color: black;
+	border-right-color:black ;
+	border-bottom-color:black;
+	border-left-color: black;
+	color: black;
+	margin-left: ;
+}
+.botao:hover{
+	color: #330000;
+	background-color: #8ba8abc3;
+	/*CSS 3*/
+	/*border-radius: 10px 0px 10px 0px;*/
+}
+#outer {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.formulario_dos_itens{
+    visibility:hidden;
+    position:absolute;
+}
+
+.formulario_dos_itens_visible{
+    visibility:visible;
+    position:relative;
+}
+
+	    
+	</style>
+	<head>
+	<body>
+	    
+	    
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+		
+<script>
+
+//$('#btn_enviar_contrato').removeClass('formulario_dos_itens_visible');
+//$('#btn_enviar_contrato').addClass('formulario_dos_itens');
+  function  EditarCliente(){
+ 
+//alert('Clicado');
+var dadosFormulario = $('#form-cntrato').serialize();
+
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user7.php",
+  data: dadosFormulario,
+  success: function(resposta) {
+      if(resposta == "Erro"){
+     // alert('Este item já foi cadastrado!');
+      }else{
+      
+      
+      			$(".spanResult").html(resposta);
+      			
+    
+   
+   
+      }
+    // variável \"resposta\" contém o que o servidor envia
+     },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+    
+    }
+    $(function(){
+	$("#Contrato").keyup(function(){
+		//Recuperar o valor do campo
+		var pesquisa = $(this).val();
+		
+		//Verificar se há algo digitado
+		if(pesquisa != ''){
+		    //--------
+var dadosFormulario = $("#form-cntrato").serialize();
+
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user6.php",
+  data: dadosFormulario,
+  success: function(resposta) {
+      if(resposta == "Erro"){
+     // alert('Este item já foi cadastrado!');
+      }else{
+      	//$(".resultado").html("Clicado - X1");
+      		//$(".td1").html( "<h3>Contato</h3>");
+      			$(".spanResult").html(resposta);
+      	
+      }
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+
+//--------
+		/*	var dados = {
+				palavra : pesquisa
+			}
+			$.post('proc_pesq_user.php', dados, function(retorna){
+				//Mostra dentro da ul os resultado obtidos 
+				$(".resultado").html(retorna);
+			});*/
+		}else{
+	//   $('#btn_enviar_contrato').removeClass('formulario_dos_itens');
+    //$('#btn_enviar_contrato').addClass('formulario_dos_itens_visible');
+		    $(".spanResult").html("");
+		}
+	});
+	
+	
+	
+		$("#btn_adicionar_contrato").click(function(){
+		    
+     	});
+		$("#btn_adicionar_contato").click(function(){
+    
+           $('#contato').removeClass('formulario_dos_itens');
+		     $('#contato').addClass('formulario_dos_itens_visible');
+    $('#div_adicionar_contato').removeClass('formulario_dos_itens_visible');
+    $('#div_adicionar_contato').addClass('formulario_dos_itens');
+    
+    
+		});
+$("#editarCliente").click(function(){
+	$('#editarCliente').addClass('formulario_dos_itens');
+    $('#editarCliente').removeClass('formulario_dos_itens_visible');
+        
+          
+    $('#div_adicionar_contrato').removeClass('formulario_dos_itens_visible');
+    $('#div_adicionar_contrato').addClass('formulario_dos_itens');
+    
+    
+     
+        
+/*		     $('#cntrato').addClass('formulario_dos_itens_visible');
+        $('#cntrato').removeClass('formulario_dos_itens');
+        
+         $('#formulario_dos_itens').addClass('formulario_dos_itens');
+        $('#formulario_dos_itens').removeClass('formulario_dos_itens_visible');
+        
+         $('#btn_enviar_contrato').addClass('formulario_dos_itens');
+        $('#btn_enviar_contrato').removeClass('formulario_dos_itens_visible');
+        
+         $('#btn_enviar_contrato2').addClass('formulario_dos_itens_visible');
+        $('#btn_enviar_contrato2').removeClass('formulario_dos_itens');
+     
+        const newDiv = $("<h4  class=\"negacao\"> Preencha os campos abaixo: </h4>");
+
+        		$(".resultado").html(newDiv);
+        		
+        		*/
+		});
+		
+	$("#btn_enviar_contrato2").click(function(){
+		//Recuperar o valor do campo
+		var contrato1 = $("#contrato").val();
+		var cliente1 = $("#cliente").val();
+		
+		
+if (contrato1 != "" && cliente1 != "" ){
+ /*
+ 
+ $('#cntrato').removeClass('formulario_dos_itens_visible');
+        $('#cntrato').addClass('formulario_dos_itens');
+        
+         $('#formulario_dos_itens').removeClass('formulario_dos_itens');
+        $('#formulario_dos_itens').addClass('formulario_dos_itens_visible');
+        
+         $('#btn_enviar_contrato').removeClass('formulario_dos_itens');
+        $('#btn_enviar_contrato').addClass('formulario_dos_itens_visible');
+        
+         $('#btn_enviar_contrato2').removeClass('formulario_dos_itens_visible');
+        $('#btn_enviar_contrato2').addClass('formulario_dos_itens');
+        	
+        	 $('#editarCliente').removeClass('formulario_dos_itens');
+        $('#editarCliente').addClass('formulario_dos_itens_visible');
+        
+        	const newDiv = $("<div  class=\"negacao\"><strong> Cliente: </strong>" + cliente1 + " <br> <strong> Contrato: </strong>"+ contrato1 + "	<br>	  </div>");
+
+        	$(".resultado").html(newDiv);
+   */     	
+}else{
+    /*	const newDiv = $("<h4  class=\"negacao\"> Preencha os campos acima! </h4>");
+
+        	$(".resultado").html(newDiv);
+       */
+       
+}
+//	enviado();
+	
+/*	
+		//Verificar se há algo digitado
+		if(contrato1 != ''){
+		//    $(".resultado").html(contrato1 + "/ - " + cliente1);
+			var dados = {
+				contrato : contrato1
+				cliente : cliente1
+			}
+			$.post('proc_pesq_user.php', dados, function(retorna){
+				//Mostra dentro da ul os resultado obtidos 
+				$(".resultado").html(retorna);
+			});
+		
+		    
+		}
+		
+		*/
+		
+
+     $('#tabela').removeClass('formulario_dos_itens');
+     $('#tabela').addClass('formulario_dos_itens_visible');
+    
+
+
+
+
+
+         
+        
+     //	$(".resultado").html("Clicado - X");
+// $("#textocoment").val()
+var dadosFormulario = $("#form-cntrato").serialize();
+
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user3.php",
+  data: dadosFormulario,
+  success: function(resposta) {
+      	//$(".resultado").html("Clicado - X1");
+      		$(".td").html(resposta);
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+
+
+	});
+});
+    
+
+
+    function  enviado(){
+        
+
+ //       alert($('#codigo').val());
+ 
+var Contrato = $('#Contrato').val();
+var NomeCliente = $('#NomeCliente').val();
+var Endereco = $('#Endereco').val();
+var Numero_endereco = $('#Numero_endereco').val();
+var Cidade = $('#Cidade').val();
+var Estado = $('#Estado').val();
+var Cep = $('#Cep').val();
+
+
+ if (Contrato == "" || NomeCliente  == ""|| Endereco == "" || Numero_endereco == "" || Cidade == "" || Cep == ""){
+ alert("Preencha todos os campos!")
+ 
+ 
+}else{
+   
+
+
+
+     $('#tabela').removeClass('formulario_dos_itens');
+     $('#tabela').addClass('formulario_dos_itens_visible');
+     
+     
+
+$('#cntrato').removeClass('formulario_dos_itens_visible');
+        $('#cntrato').addClass('formulario_dos_itens');
+        
+      $('#div_adicionar_contato').removeClass('formulario_dos_itens');
+    $('#div_adicionar_contato').addClass('formulario_dos_itens_visible');
+    
+	
+     
+$('#div_adicionar_contrato').removeClass('formulario_dos_itens');
+      $('#div_adicionar_contrato').addClass('formulario_dos_itens_visible');
+     
+$('#td1').removeClass('formulario_dos_itens');
+$('#td1').addClass('formulario_dos_itens_visible');
+     
+
+$('#resultado3').removeClass('formulario_dos_itens');
+$('#resultado3').addClass('formulario_dos_itens_visible');
+
+         
+        
+     //	$(".resultado").html("Clicado - X");
+// $("#textocoment").val()
+var dadosFormulario = $("#form-cntrato").serialize();
+
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user3.php",
+  data: dadosFormulario,
+  success: function(resposta) {
+      if(resposta == "Erro"){
+     // alert('Este item já foi cadastrado!');
+      }else{
+      	//$(".resultado").html("Clicado - X1");
+      		$(".td").html(resposta);
+      			$(".resultado2").html(resposta);
+      		
+      		
+$('#ContratoContato').val(Contrato);
+//$('#Contrato').val("");
+$('#NomeCliente').val("");
+$('#Endereco').val("");
+$('#Numero_endereco').val("");
+$('#Cidade').val("");
+$('#Estado').val("");
+$('#Cep').val("");
+
+//--------
+var dadosFormulario = $("#form-contato").serialize();
+
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user9.php",
+  data: dadosFormulario,
+  success: function(resposta1) {
+      if(resposta1 == "Erro"){
+     // alert('Este item já foi cadastrado!');
+      }else{
+      	//$(".resultado").html("Clicado - X1");
+      	
+    //  alert(resposta1);
+      	$(".td1").html( "<h3>Contato</h3>");
+      			$(".resultado3").html(resposta1);
+  }
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+
+//--------
+      }
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+
+     
+/*
+	//$(".resultado").html("Clicado2");
+	
+var dadosFormulario = "";//$("#coment").serialize();
+	var contrato1 = $("#contrato").val();
+		var cliente1 = $("#cliente").val();
+//		var dados = {
+//				contrato : contrato1
+//				cliente : cliente1
+//			};
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user.php",
+  data: dados,
+  success: function(resposta) {
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+   
+    // const newBtn = $("<button type=\button\" class=\"negacao\">Pressione-me!</button>");
+
+//   alert(resposta);
+//const newBtn = $(resposta);
+
+    
+    // Adiciona-o à lista de botões:
+    $(".resultado").html(resposta);
+//   $("#div1").append(newBtn);
+  },
+  error: function() {
+ $(".resultado").html("correu mal, agir em conformidade");
+  }
+});
+
+*/
+ }
+ 
+        
+    };
+    
+    function  enviadocontato(){
+        
+/*ContratoContato
+Nome_contato
+Email_contato
+Telefone_contato
+Funcao_contato
+Nome_Setor
+Contrato	
+ */
+ //       alert($('#codigo').val());
+ 
+var ContratoContato = $('#ContratoContato').val();
+var Nome_contato = $('#Nome_contato').val();
+var Email_contato = $('#Email_contato').val();
+var Telefone_contato = $('#Telefone_contato').val();
+var Funcao_contato = $('#Funcao_contato').val();
+var Nome_Setor = $('#Nome_Setor').val();
+//var Contrato = $('#Contrato').val();
+
+
+ if (ContratoContato == "" || Nome_contato  == ""|| Email_contato == "" || Telefone_contato == "" || Funcao_contato == "" || Nome_Setor == ""){
+ alert("Preencha todos os campos!")
+ 
+ 
+}else{
+   
+
+
+
+     $('#tabela').removeClass('formulario_dos_itens');
+     $('#tabela').addClass('formulario_dos_itens_visible');
+    
+
+$('#cntrato').removeClass('formulario_dos_itens_visible');
+        $('#cntrato').addClass('formulario_dos_itens');
+     
+     
+$('#contato').removeClass('formulario_dos_itens_visible');
+      $('#contato').addClass('formulario_dos_itens');
+     
+$('#div_adicionar_contrato').removeClass('formulario_dos_itens');
+      $('#div_adicionar_contrato').addClass('formulario_dos_itens_visible');
+     
+ $('#div_adicionar_contato').removeClass('formulario_dos_itens');
+    $('#div_adicionar_contato').addClass('formulario_dos_itens_visible');
+    
+	
+
+         
+        
+     //	$(".resultado").html("Clicado - X");
+// $("#textocoment").val()
+var dadosFormulario = $("#form-contato").serialize();
+
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user5.php",
+  data: dadosFormulario,
+  success: function(resposta) {
+      if(resposta == "Erro"){
+      alert('Este item já foi cadastrado!');
+      }else{
+      	//$(".resultado").html("Clicado - X1");
+      	//	$(".td1").html(resposta);
+      			$(".resultado3").html($(".resultado3").val() + resposta);
+      		
+      		
+//$('#ContratoContato').val(Contrato);
+//$('#ContratoContato').val("");
+$('#Nome_contato').val("");
+$('#Email_contato').val("");
+$('#Telefone_contato').val("");
+$('#Funcao_contato').val("");
+$('#Nome_Setor').val("");
+//$('#Contrato').val("");
+
+      }
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+
+     
+/*
+	//$(".resultado").html("Clicado2");
+	
+var dadosFormulario = "";//$("#coment").serialize();
+	var contrato1 = $("#contrato").val();
+		var cliente1 = $("#cliente").val();
+//		var dados = {
+//				contrato : contrato1
+//				cliente : cliente1
+//			};
+$.ajax({
+  type: "POST",
+  url: "proc_pesq_user.php",
+  data: dados,
+  success: function(resposta) {
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+   
+    // const newBtn = $("<button type=\button\" class=\"negacao\">Pressione-me!</button>");
+
+//   alert(resposta);
+//const newBtn = $(resposta);
+
+    
+    // Adiciona-o à lista de botões:
+    $(".resultado").html(resposta);
+//   $("#div1").append(newBtn);
+  },
+  error: function() {
+ $(".resultado").html("correu mal, agir em conformidade");
+  }
+});
+
+*/
+ }
+ 
+        
+    };
+    
+</script>
+	<div style="text-align:center;"id="outers">  
+  
+  <div align="center"style="text-align:;width:;margin-left:;">   
+		<h1>Cadastrando cliente</h1>
+	
+	
+	<button class="formulario_dos_itens botao"id="editarCliente" style=""type="" value="">Editar os dados do cliente</button>
+
+	<div  class="formulario_dos_itens_visible" style="width:50%;"id="cntrato">
+	    <div class="spanResult"></div>
+	   
+	<form method="POST" id="form-cntrato" action="">
+    		
+    		    	<h3>Adicione os dados a seguir:</h3>
+
+
+
+
+
+	<div style="float:left;width:100%;text-align:left;">
+        	<div style="float:left;width:200px;text-align:left;">
+        	<label>Digite o número do contrato</label><br>
+		    <input style="width:200px;" type="text" id="Contrato" name="Contrato">
+		   </div>
+		   
+		   <div style="float:left;width:402px;margin-left:10px;text-align:left;">
+		   <label>Digite o nome do cliente</label><br>
+		    <input style="width:420px;"type="text" id="NomeCliente"name="NomeCliente"><br><br>
+    	   </div>
+    </div>	   
+    
+    <div style="float:left;width:100%;text-align:left;">
+    	   	<div style="float:left;width:480px;text-align:left;">
+    	   <label style="text-align:left;"> Endereço</label><br>
+		    <input style="width:480px;"type="text" id="Endereco"name="Endereco"><br><br>
+			</div>
+			
+			<div style="float:left;width:140px;margin-left:10px;text-align:left;">
+			<label style="text-align:left;">Número</label><br>
+		    <input style="width:140px;"type="text" id="Numero_endereco"name="Numero_endereco"><br><br>
+	       </div>
+	</div>
+	<div style="float:left;width:100%;text-align:left;">
+	    
+	    	<div style="float:left;width:360px;text-align:left;">
+	       	<label style="text-align:left;"> Cidade</label><br>
+		    <input style="width:360px;" type="text" id="Cidade"name="Cidade"><br><br>
+		    </div>
+		
+			<div style="float:left;width:50px;margin-left:10px;text-align:left;">
+			<label style="text-align:left;">Estado </label><br>
+		    <input style="width:50px;"type="text" id="Estado"name="Estado"><br><br>
+			</div>
+			
+			<div style="float:left;width:200px;margin-left:10px;text-align:left;">
+			<label style="text-align:left;">Cep</label><br>
+		    <input style="width:200px;"type="text" id="Cep"name="Cep"><br><br>
+		    </div>
+   </div> 	    
+		    
+		 
+		<!--
+Contrato
+NomeCliente
+Endereco
+Numero_endereco
+Cidade
+Estado
+Cep
+-->		 
+            <input type="hidden" class="formulario_dos_itens" id="id"name="id">
+          
+		
+		    
+
+</form>
+
+<button class="botao"id="btn_enviar_contrato" type="" onclick="enviado()"value="">Cadastrar</button><br><br>
+
+	</div>
+	
+<br>
+
+
+
+
+<div>
+		 
+		</div>
+
+<div id="tabela" class="formulario_dos_itens" style="border:solid 1px;width:90%;">
+    <h3>Dados do cliente</h3>
+<table  style='border-bottom:1pt solid black;'> 
+<tr> 
+<th style='text-align:center;'width="5%">Contrato</th> 
+<th style='text-align:center;'width="23%">Cliente</th> 
+<th style='text-align:center;'width="25%"></th> 
+<th style='text-align:center;'width="5%"></th> 
+<th style='text-align:center;'width="18%">Endereço</th> 
+<th style='text-align:center;'width="14%"></th> 
+<th style='text-align:center;'width="10%"></th> 
+</tr> 
+
+	<div class="resultado">
+		  </div>
+</table>
+
+<div class="td">
+
+       
+    </div>
+        
+    
+    	 <button class= "botao"style='width:100px;' onclick="EditarCliente()">Editar cliente</button><br>
+
+  </div>
+  
+
+
+<table style="visibility:hidden;position:;"border="1">
+    <tr>
+        <th height="">Frutas</th>
+        <th>Verduras</th>
+        <th>Grãos</th>
+        
+        </tr>
+        
+        <div id="resultado2">
+            
+            </div>
+        
+        <tr>
+            
+            <td>Laranja</td>
+            <td>Beterraba</td>
+            <td>Trigo</td>
+            </tr>
+            
+    </table>
+
+		<!--	<label>Arquivo</label><br>
+			<input type="file" name="arquivo"><br><br>
+			<label>Data da entrega do material limpo</label><br>
+			<input type="date" name="dataDaEntrega"><br><br>
+		-->
+		
+<div class="formulario_dos_itens td1" id="td1"style="border:solid 1px;width:50%;">
+       
+       
+    </div>
+        
+    
+        <div id="resultado3" class="formulario_dos_itens resultado3" style="border:solid 1px;width:50%;">
+            
+            </div>
+	
+		</div>
+       
+	 <div align="center"style="width:100%">
+	<div  class="formulario_dos_itens"  style="width:50%"id="contato">
+	<form method="POST" id="form-contato" action="">
+    		
+    		    	<h3>Adicione os dados do contato:</h3>
+
+
+
+
+
+        	
+        
+        
+		   
+		   
+		 
+		 
+
+        	
+        
+         <input class="formulario_dos_itens"type="text" id="ContratoContato" name="ContratoContato">
+		   
+	<div style="float:left;width:100%;text-align:left;">
+		   <div style="float:left;width:500px;text-align:left;">
+		       <label>Digite o nome do contato</label><br>
+		       <input style="width:500px;"type="text" id="Nome_contato"name="Nome_contato"><br><br>
+    	     </div>
+    	   <div style="float:left;width:500px;margin-left:;text-align:left;">
+    	       <label> Email</label><br>
+    	       <input style="width:500px;"type="text" id="Email_contato"name="Email_contato"><br><br>
+    	   </div>
+    	   <div style="float:left;width:200px;margin-left:;text-align:left;">
+			<label>Telefone</label><br>
+		    <input style="width:200px;"type="text" id="Telefone_contato"name="Telefone_contato"><br><br>
+	     
+	    </div>
+	</div>
+	<div style="float:left;width:100%;text-align:left;">
+	       <div style="float:left;width:300px;text-align:left;">
+	       <label> Função</label><br>
+		   <input style="width:300px;"type="text" id="Funcao_contato"name="Funcao_contato"><br><br>
+		    </div>
+		    <div style="float:left;width:300px;margin-left:10px;text-align:left;">
+		 <label>Setor </label><br>
+		    <input style="width:300px;"type="text" id="Nome_Setor"name="Nome_Setor"><br><br>
+			</div>
+</div>	
+			
+			
+		  
+    	    
+		    
+		 
+		<!--
+Contrato
+NomeCliente
+Endereco
+Numero_endereco
+Cidade
+Estado
+Cep
+-->		 
+            <input type="hidden" class="formulario_dos_itens" id=""name="id">
+          
+		
+		    
+
+</form>
+<button class=" botao"id="btn_enviar_contato1" type="" onclick="enviadocontato()"value="">Cadastrar</button><br><br>
+	</div>
+	</div>
+	<div class="formulario_dos_itens"  id="div_adicionar_contato">
+<br>
+<button class=" botao"id="btn_adicionar_contato" type="" onclick=""value="">Adicionar contato</button>
+<button class=" botao"id="" type="" onclick=""value="">Adicionar itens</button><br><br>
+</div>
+		</div>
+
+
+		
+	</body>
+</html>

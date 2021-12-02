@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> Ler Barcode </title>
+    
+    <style>
+#digitar{
+    visibility:hidden;
+}
+.leitura{
+    visibility:hidden;
+}
+video {
+
+max-width: 300px;	
+  width: 100%;
+  height: auto;
+}
+canvas {
+  display: none;
+}
+        
+    </style>
+</head>
+
+<body>
+    
+<div align="center">    
+<button id="botaoleitura">
+    Leitura
+</button>
+<button id="botaodigitar">
+    Digitar o código de barras
+</button><br><br>
+<input id="digitar"type="number">
+</div>
+<div align="center" class="leitura"id="leitura">
+    <div id="resultado"></div>
+    <div id="camera"></div>
+
+    <script src="quagga.js"></script>
+    
+    <script>
+    
+    
+function id(el) {
+  return document.getElementById(el);
+}
+    
+id('botaoleitura').addEventListener('click',function () {
+
+document.getElementById("leitura").style = 'visibility: visible; ';
+document.getElementById("digitar").style = 'visibility: hidden; ';
+
+
+quagga()
+})
+
+id('botaodigitar').addEventListener('click',function () {
+
+document.getElementById("leitura").style = 'visibility: hidden; ';
+
+document.getElementById("digitar").style = 'visibility: visible; ';
+Quagga.stop();
+})
+
+
+
+  //  $("#leitura").show(function (){
+
+//id('botaoleitura').addEventListener('click',function () {
+function quagga() {
+Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+            },
+            decoder: {
+                readers: ["ean_reader"]
+            }
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                return
+            }
+            console.log("Initialization finished. Ready to start");
+            Quagga.start();
+        });
+
+        Quagga.onDetected(function (data) {
+            console.log(data.codeResult.code);
+            document.querySelector('#resultado').innerText = data.codeResult.code;
+        });
+}
+//})
+    </script>
+
+</div>
+
+
+<div align="center" id="listaderesultado">
+    <h3>Resultado</h3>
+    
+</div>
+
+</body>
+
+</html>
