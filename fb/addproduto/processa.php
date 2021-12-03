@@ -1,13 +1,14 @@
 <?php
 	include_once("conexao.php");
 	
-	
+	 $_SESSION["idfb"] = "";
+	 	$id=$_POST['id'];
 	$title=$_POST['title'];
 	$description= "";
 	$availability= "";
 	$condition= "";
 	$price= "";
-	$link= "";
+	$link= $_POST['link'];
 	$image_link= "";
 	$brand= "";
 	$google_product_category= "";
@@ -34,6 +35,39 @@
 	//Salvar no banco de dados
 
 	
+	
+$sql="SELECT * FROM ShopFaceBook WHERE id = '$id'";
+
+$rs=mysql_query($sql,$conn) or die(mysql_error());
+
+//  echo 	die(mysql_error());//die("Falha na conexao: " . mysqli_error());
+$result=mysql_fetch_array($rs);
+
+  echo "o";
+$total = mysql_num_rows($rs);
+
+
+		if($total > 0 ) {
+	
+	
+
+    $idd=  $result["id"];
+    $vowels = array("https://connect-com-br.umbler.net/produto/");
+$myoldfolder = str_replace($vowels, "", $result["link"]);
+$myoldfolder = "/$myoldfolder";//"../".$myoldfolder;
+//		echo realpath(dirname(__FILE__)).$myoldfolder;
+rename('../produto/'.$myoldfolder.'/','../produto/'.$titulo.'/');
+//rename(realpath(dirname(__FILE__)).'/myoldfolder',realpath(dirname(__FILE__)).'/mynewfolder');
+
+	 mysql_query("UPDATE ShopFaceBook SET  link='$link', title='$title'  WHERE id='$id'");
+	
+	
+	echo "Atualizado";
+
+	
+	}else{
+	    
+	    
 	
 	
 	
@@ -83,6 +117,6 @@ if(!is_dir($diretorio)){
 	
 //		echo "Imagem salva com sucesso!<br>";
 //	}
-	
+	}
 ?>
 

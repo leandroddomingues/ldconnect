@@ -29,6 +29,7 @@
 	$shipping= "";
 	$shipping_weight= "";
 	$style= "";
+	//$additional_image_link="tese";
 	
 	
 	//Pasta onde o arquivo vai ser salvo
@@ -119,7 +120,28 @@ rename('../produto/'.$myoldfolder.'/','../produto/'.$titulo.'/');
 
 	 mysql_query("UPDATE ShopFaceBook SET  link='$link', title='$title'  WHERE id='$id'");
 	
-	echo "Produto atualizado!";
+	echo '
+	
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
+  $( "div.success" ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+});
+
+
+</script>
+<div class="alert-box success" style="padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px; color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;">Título atualizado!!!</div>
+    
+    
+    
+';
 	}else{
 	    
 	    /////
@@ -134,12 +156,38 @@ if (!mysql_query($sql1,$conn))
   die('Erro: ' . mysqli_error($conn));
   }
   else {
+      echo ' 
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){  // A DIFERENÇA ESTA AQUI, EXECUTA QUANDO O DOCUMENTO ESTA "PRONTO"
+  $( "div.success" ).fadeIn( 300 ).delay( 1500 ).fadeOut( 400 );
+});
+
+</script>
+<div class="alert-box success" style="padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px; color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;">Você está adicionando um novo produto!!!</div>
+    
+    
+';
       	//Pasta onde o arquivo vai ser salvo
 	$_UP['pasta'] = '../produto/'.$titulo.'/';//;'../produto/'.$ultimo_id.'/';
 	
 	//Criar a pasta de foto do produto
 	mkdir($_UP['pasta'], 0777);
 	
+	//	$_UPFOTOS['pastafotos'] = '../produto/'.$titulo.'/';//;'../produto/'.$ultimo_id.'/';
+	
+	//Criar a pasta de foto do produto
+	//mkdir($_UP['pastafotos'], 0777);
+	
+
 	
 $conteudo = '<?php 
 session_start();
@@ -193,23 +241,15 @@ echo \'<div align="left">
 ?>';
 $fp = fopen('../produto/'.$titulo.'/index.php','wb');
 fwrite($fp,$conteudo);
+
+
+//$fpfotos = fopen('../produto/'.$titulo.'/imagens','wb');
+//fwrite($fpfotos,$conteudo);
+	mkdir(__DIR__.'../produto/'.$titulo.'/imagens', 0777, true);
 fclose($fp);
+//fclose($fpfotos);
 
-		echo 
 		
-		
-		
-		
-		
-		
-		
-		
-		 ''
-
-
-
-
-;
 
 
 		
