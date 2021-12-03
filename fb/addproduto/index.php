@@ -12,43 +12,69 @@
 		<title>LdConnect</title>
 	</head>
 	<body>
-	
-	
 	<style>
-    @import url('http://fonts.googleapis.com/css?family=Open+Sans');
+@import url('http://fonts.googleapis.com/css?family=Open+Sans');
 p, ol, #message {
      font-family:'Open Sans';
 }
 #multiple_upload {
       position:relative;
-       border:1px solid #ff7b00;
-      background:#ff7b00;
-      color:#ffffff;
-      font-family:'Open Sans';
-      font-size:15px;
-      font-weight:bold;
-      padding:12px 28px;
-      margin:4px 8px;
-       
-      position:;
+}
+.uploadChange{
+      position:absolute;
       top:2px;
       left:0;
-    
-     
-     
-      width:400px;
-     
-   
+      opacity:0.01;
+      border:none;
+      width:200px;
+     visibility:hidden;
+      padding:10px;
+      z-index:1;
+      cursor:pointer;
 }
-#uploadChange {
-       z-index:1;
-      cursor:pointer
+.divfotoprincipal{
+    float:left;
 }
-#message {
-    
-    
+.divfotosadicionais{
+    float:left;
+    margin-top:40px;
+}
+.fotoprincipal {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ 
+      border:2px solid #ccc;
+      background:#fff;
+    max-width:140px;
+    max-height:140px;
      
+      min-width:140px;
+      float:;
+      margin:4px;
+      overflow:hidden;
+      color: #333
+      cursor:pointer;
+      
+}
+
+.fotosadicionais {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    
+      border:2px solid #ccc;
+      background:#fff;
+       max-width:100px;
+    max-height:100px;
      
+      min-width:100px;
+      float:;
+      margin:4px;
+      overflow:hidden;
+      color: #333
+      cursor:pointer;
+      text-align:center;
 }
 #botao {
       border:1px solid #ff7b00;
@@ -60,13 +86,9 @@ p, ol, #message {
       padding:12px 28px;
       margin:4px 8px;
 }
-#multiple_upload:hover > #botao {
-      background:#662f00;
-      border-color:#662f00;
-} 
+
 #lista ol {
       margin-left: -16px; 
-      width:300px;
 }
 #lista ol li {
      border-bottom:1px solid #eee;
@@ -100,8 +122,8 @@ img.item {
 }
 
 .box-images {
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     background-color: #eee;
     border:1px solid #eee;
     margin-bottom:15px;
@@ -109,14 +131,13 @@ img.item {
     display: flex;
     align-items: center;
     justify-content: center;
-    float:;
+    float:left;
     margin:0 10px 20px 0;
-}
-
-
-
-
+}    
 </style>
+	
+	
+	
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -199,8 +220,12 @@ $(document).ready(function(){
 
 $(function () {
 
-  $("#title").on("keyup", function (event) {
-        $("#titulo").val(slugify($(this).val()));
+//  $("#title").on("keyup", function (event) {
+  $(".atualiza").on("change", function (event) {
+   //    $(".atualiza").on("keyup", function (event) {
+        $("#titulo").val(slugify($("#title").val()));
+        
+        
   /*
   
            var id = $("#id").val();
@@ -226,25 +251,13 @@ $(function () {
     
   */
         /////
+        
+        if ($(this).val()==""){
             
+        }else{
+            variavel = setTimeout(criarSalvarPasta, 4000);
 // $("#textocoment").val()
-var dadosFormulario = $("#fb").serialize();
-
-$.ajax({
-  type: "POST",
-    url: "criarSalvarPasta.php", 
-  data: dadosFormulario,
-  success: function(resposta) {
-       $('#result').html(resposta);
-    // variável "resposta" contém o que o servidor envia
-    // aqui código a executar quando correu tudo bem
-  },
-  error: function() {
-      
-     $('#result').html(resposta);
-    // correu mal, agir em conformidade
-  }
-});
+}
 
         ///
   
@@ -253,12 +266,30 @@ $.ajax({
     
   
   });
+function criarSalvarPasta(){
+    var dadosFormulario = $("#fb").serialize();
 
+$.ajax({
+  type: "POST",
+    url: "criarSalvarPasta.php", 
+  data: dadosFormulario,
+  success: function(resposta) {
+       $('#formulario').html(resposta);
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+      
+     $('#formulario').html(resposta);
+    // correu mal, agir em conformidade
+  }
+});
+}
 });  
-     $("#titulo").on('change',function(){
-     
-     });
-    $("#uploadChange").on('change',function(){
+    $(".uploadChange").on('change',function(){
+        
+      
+     //   $('#img1').src("../../imagens/load.gif");
   //   $('#file').change(function () {
      FormularioOk = false
     var files = this.files; // SELECIONA OS ARQUIVOS
@@ -272,7 +303,10 @@ $.ajax({
         FormularioOk = false;
         return false;
     } else {
+        
         var id = $(this).attr('id');
+         var imgid = "#img"+ id;
+        
         for (i = 0; i < qtde; i++) {
             tamanho += files[i].size;
           
@@ -288,12 +322,34 @@ $.ajax({
             return false;
         } else {
             FormularioOk = true;
+          
+              $(imgid).attr('src', '../../imagens/aguarde.gif');
+              
+idprod = document.getElementById("id").value;
+
+$.ajax({
+  type: "POST",
+    url: "enviarfoto.php", 
+  //data: dadosFormulario,
+  data: {
+    id:  idprod,
+    arquivo: files
+  },
+  success: function(resposta) {
+      document.getElementById("id").value = resposta;
+    // variável "resposta" contém o que o servidor envia
+    // aqui código a executar quando correu tudo bem
+  },
+  error: function() {
+    // correu mal, agir em conformidade
+  }
+});
+
         return true;
         }
     }
-//});
+});
 
-    });
 });
    $(function(){
     $('#uploadChange').on('change',function() {
@@ -361,18 +417,32 @@ function removeFile(item, id) {
 </script>
 
 <div align="center">
-    <div id="result"></div>
+    
+<div id="formulario" style="height: 60px;
+">
+    
+	</div>
 <div  style="width:50%;">
 
 <form method="POST" action="processa.php" id="fb" name="fb" enctype="multipart/form-data">
-    <div align="left" style="border:1px solid #eee;">
-    <input type="text" id="id" name="id"value=""/>
-    <input type="text" id="id1" name="id1"value="<?php echo $_SESSION['idfb']?>"/>
+    
+    
+    <input type="hidden" id="id" name="id"value=""/>
+    <input type="hidden" id="id1" name="id1"value="<?php echo $_SESSION['idfb']?>"/>
+   
+   
+   
+   
+   
+   
+   
+  <div>
+<div align="left" style="border:1px solid #eee;">
     <div align="left">
     
 	<label>Título: </label><br>
-	<input type="text" name="title"id="title" max="65" style="width:90%;"/>*<br>
-		<input type="text" name="titulo" id="titulo"max="65" style="width:90%;"/><br>
+	<input type="text" class="atualiza"name="title"id="title" max="65" style="width:90%;"/>*<br>
+		<input type="hidden" name="titulo" id="titulo"max="65" style="width:90%;"/><br>
 	</div>
 	
 	 <div align="left">
@@ -553,19 +623,63 @@ function removeFile(item, id) {
 	</div>
 	
 	
-	
-	
-    <div id="messagem">Escolha a foto principal</div>
-    <div id="multiple_upload">
-    <input type="file" style="visibility:;background:;" id="uploadChange" name="arquivo[]" />
-    </div>
-    <div id="lista"></div>
+   <div align="center"style="margin-top:;border:1px solid #eee;height:400px;">
+	  <div align="left"style="width:400px;margin-top:50px;">
+	      <h3>Adicionar foto(s)</h3>
+<div class="divfotoprincipal">
+     <label for="uploadChange" class="fotoprincipal"  id="fotoprincipal">
+ 
+<img  id="imguploadChange"class="fotoprincipal" src="../../imagens/Foto principal.png"></image>        
+   
+ </label>
+    <input class="uploadChange"type="file" multiple="multiple" name="arquivo[]"id="uploadChange" />
+
+</div>
+
+
+<div class="divfotosadicionais">
+     <label for="uploadChange1" class="fotosadicionais"id="fotosadicionais">
+<img class="fotosadicionais"id="imguploadChange1"src="../../imagens/Mais.png"></image>        
+ </label>
+    <input class="uploadChange"type="file"  name="arquivo[]"id="uploadChange1" />
+  </div>
+  
+  
+<div class="divfotosadicionais">
+     <label for="uploadChange2" class="fotosadicionais"id="fotosadicionais">
+<img class="fotosadicionais"id="imguploadChange2"src="../../imagens/Mais.png"></image>        
+ </label>
+    <input class="uploadChange"type="file" name="arquivo[]"id="uploadChange2" />
+  </div>
+  
+<div style="margin-left:40px;"class="divfotosadicionais">
+     <label for="uploadChange3" class="fotosadicionais"id="fotosadicionais">
+<img class="fotosadicionais"id="imguploadChange3"src="../../imagens/Mais.png"></image>        
+ </label>
+    <input class="uploadChange"type="file" name="arquivo[]"id="uploadChange3" />
+  </div>
+  
+  
+  
+<div class="divfotosadicionais">
+     <label for="uploadChange4" class="fotosadicionais"id="fotosadicionais">
+<img class="fotosadicionais"id="imguploadChange4"src="../../imagens/Mais.png"></image>        
+ </label>
+    <input class="uploadChange"type="file"  name="arquivo[]"id="uploadChange4" />
+  </div>
+  
+<div class="divfotosadicionais">
+     <label for="uploadChange5" class="fotosadicionais"id="fotosadicionais">
+<img class="fotosadicionais"id="imguploadChange5"src="../../imagens/Mais.png"></image>        
+ </label>
+    <input class="uploadChange"type="file" name="arquivo[]"id="uploadChange5" />
+  </div>
+  
+</div>
    
    
-   
-   
-   
-   <div align="center"style="margin-top:30px;border:1px solid #eee;">
+   </div>
+   <div align="center"style="margin-top:10px;border:1px solid #eee;padding:30px 0px 30px 0px;">
    <div align="left" style="margin-top:;float:center;width:30%;">
 	<label>Status *:</label><br>
 	<select name="status">
@@ -577,8 +691,9 @@ function removeFile(item, id) {
 	<input type="submit" value="Cadastrar">
 	</div>
 	</div>
-	
-	
+
+
+
 </form>
 
 </div>
