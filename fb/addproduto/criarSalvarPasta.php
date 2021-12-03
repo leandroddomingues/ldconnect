@@ -246,7 +246,7 @@ fwrite($fp,$conteudo);
 //$fpfotos = fopen('../produto/'.$titulo.'/imagens','wb');
 //fwrite($fpfotos,$conteudo);
 //	mkdir(__DIR__.'../produto/'.$titulo.'/imagens', 0777, true);
-	mkdir('../produto/'.$titulo.'/imagens', 0777, true);
+	mkdir('../produto/'.$titulo.'/imagens', 0777);
 fclose($fp);
 //fclose($fpfotos);
 
