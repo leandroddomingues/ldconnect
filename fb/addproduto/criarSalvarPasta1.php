@@ -62,7 +62,7 @@ if(!is_dir($diretorio)){
 		Inserido: $ultimo_id";
 }else{
     
-$sql1="SELECT * from ShopFaceBook WHERE  WHERE id='$id'";
+$sql1="SELECT * from ShopFaceBook  WHERE id='$id'";
 $rs1=mysql_query($sql1,$conn) or die(mysql_error());
 $result1=mysql_fetch_array($rs1);
 
