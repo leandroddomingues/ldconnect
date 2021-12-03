@@ -11,7 +11,7 @@
 	$availability= "";
 	$condition= "";
 	$price= "";
-	//$link= "";
+	$link= "";
 	$image_link= "";
 	$brand= "";
 	$google_product_category= "";
